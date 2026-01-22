@@ -26,7 +26,7 @@
 },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.88",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^7.2.0",
     "@remix-run/dev": "^2.16.1",
     "@remix-run/fs-routes": "^2.16.1",
     "@remix-run/node": "^2.16.1",
@@ -42,7 +42,7 @@
     "papaparse": "^5.5.3",
     "pdf-parse": "^2.4.5",
     "pdfjs-dist": "^5.4.530",
-    "prisma": "^6.2.1",
+    "prisma": "^7.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tesseract.js": "^7.0.0",
