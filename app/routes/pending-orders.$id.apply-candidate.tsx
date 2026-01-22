@@ -2,6 +2,8 @@ import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { prisma } from "../db.server";
 import { autoMapPendingOrderLineItems } from "../autoMapPendingOrder.server";
+import { requireAdmin } from "../services/requireAdmin.server";
+
 
 type LineItem = {
   rawText: string;
@@ -15,6 +17,8 @@ type LineItem = {
 };
 
 export async function action({ request, params }: ActionFunctionArgs) {
+  await requireAdmin(request);
+
   const form = await request.formData();
 
   const id = params.id || String(form.get("id") || "");

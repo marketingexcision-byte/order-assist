@@ -6,12 +6,9 @@ import { autoMapPendingOrderLineItems } from "../autoMapPendingOrder.server";
 import { getVariantById, getVariantStockByIds } from "../shopify/adminCatalog.server";
 import { computeStockBadge } from "../services/stockStatus";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-
-
+import { requireAdmin } from "../services/requireAdmin.server";
 
 type MatchStatus = "UNMAPPED" | "AUTO_MAPPED" | "MAPPED";
-
 
 type LineItem = {
   rawText: string;
@@ -189,6 +186,8 @@ function mergeDuplicatesByVariantId(items: LineItem[]): { merged: LineItem[]; ch
 
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  await requireAdmin(request);
+
   const origin = process.env.APP_URL ?? new URL(request.url).origin;
 
   const activeTab = getActiveTab(request.url);
@@ -288,6 +287,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
+    await requireAdmin(request);
+
   const form = await request.formData();
 
   const intent = String(form.get("intent") || "");
