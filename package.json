@@ -23,8 +23,7 @@
   "type": "module",
 "engines": {
   "node": "22.x"
-}
-
+},
   "dependencies": {
     "@napi-rs/canvas": "^0.1.88",
     "@prisma/client": "^6.2.1",
