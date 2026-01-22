@@ -16,6 +16,8 @@
     "shopify": "shopify",
     "prisma": "prisma",
     "graphql-codegen": "graphql-codegen",
+    "dev:remix": "remix dev",
+    "postinstall": "patch-package",
     "vite": "vite"
   },
   "type": "module",
@@ -23,6 +25,7 @@
     "node": ">=20.19 <22 || >=22.12"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.88",
     "@prisma/client": "^6.2.1",
     "@remix-run/dev": "^2.16.1",
     "@remix-run/fs-routes": "^2.16.1",
@@ -33,11 +36,18 @@
     "@shopify/polaris": "^12.0.0",
     "@shopify/shopify-app-remix": "^4.1.0",
     "@shopify/shopify-app-session-storage-prisma": "^8.0.0",
+    "csv-parse": "^6.1.0",
     "isbot": "^5.1.0",
+    "openai": "^6.16.0",
+    "papaparse": "^5.5.3",
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.4.530",
     "prisma": "^6.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite-tsconfig-paths": "^5.0.1"
+    "tesseract.js": "^7.0.0",
+    "vite-tsconfig-paths": "^5.0.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@remix-run/eslint-config": "^2.16.1",
@@ -49,6 +59,7 @@
     "@types/react-dom": "^18.2.14",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^10.0.1",
+    "patch-package": "^8.0.1",
     "prettier": "^3.2.4",
     "typescript": "^5.2.2",
     "vite": "^6.2.2"

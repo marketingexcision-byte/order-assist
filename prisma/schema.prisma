@@ -32,3 +32,92 @@ model Session {
   refreshToken        String?
   refreshTokenExpires DateTime?
 }
+
+model IngestJob {
+  id             String   @id @default(cuid())
+  status         String
+  source         String
+
+  // tracking
+  startedAt      DateTime?
+  finishedAt     DateTime?
+  requestId      String?  @unique
+  to             String?
+
+  // outcome
+  pendingOrderId String?
+  error          String?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@index([status, startedAt])
+  @@index([to])
+  @@index([requestId])
+}
+
+
+
+model PendingOrder {
+  id                     String   @id @default(cuid())
+  poNumber                String?
+  status                  String   @default("READY_FOR_REVIEW")
+  lineItems               Json
+  inboundEmails           InboundEmail[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  deliveryAddress         Json?
+  deliveryAddressSource   String?
+
+  shopifyCustomerId        String?  // gid://shopify/Customer/...
+  prevDefaultAddressId     String?  // gid://shopify/MailingAddress/...
+  tempDefaultAddressId     String?  // gid://shopify/MailingAddress/...
+  defaultAddressRevertAt   DateTime?
+  defaultAddressRevertedAt DateTime?
+}
+
+
+
+model InboundEmail {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+
+  messageId     String?  @unique
+  from          String
+  to            String
+  subject       String?
+  receivedAt    DateTime?
+
+  textBody      String?
+  htmlBody      String?
+
+  attachments   Json?
+  aiExtracted   Json?
+  aiError       String?
+
+  pendingOrderId String?
+  pendingOrder   PendingOrder? @relation(fields: [pendingOrderId], references: [id])
+
+  customerMailboxId String?
+  customerMailbox   CustomerMailbox? @relation(fields: [customerMailboxId], references: [id])
+}
+
+
+model CustomerMailbox {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  isActive        Boolean  @default(true)
+
+  // The inbound address you issue to the customer
+  emailAddress    String   @unique
+
+  // How you identify the customer in your system
+  shopifyCustomerId String  // or String? if not always known
+
+  // Optional metadata
+  label           String?
+
+  inboundEmails   InboundEmail[]
+}

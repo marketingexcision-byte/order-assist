@@ -1,0 +1,18 @@
+diff --git a/node_modules/@shopify/shopify-app-remix/dist/esm/react/components/AppProvider/AppProvider.mjs b/node_modules/@shopify/shopify-app-remix/dist/esm/react/components/AppProvider/AppProvider.mjs
+index 600147e..5da7fd5 100644
+--- a/node_modules/@shopify/shopify-app-remix/dist/esm/react/components/AppProvider/AppProvider.mjs
++++ b/node_modules/@shopify/shopify-app-remix/dist/esm/react/components/AppProvider/AppProvider.mjs
+@@ -1,11 +1,12 @@
+ import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
+ import { AppProvider as AppProvider$1 } from '@shopify/polaris';
+-import englishI18n from '@shopify/polaris/locales/en.json' with { type: 'json' };
++import englishI18n from '@shopify/polaris/locales/en.json' assert { type: 'json' };
+ import { useNavigate } from '@remix-run/react';
+ import { useEffect } from 'react';
+ import { APP_BRIDGE_URL } from '../../const.mjs';
+ import { RemixPolarisLink } from '../RemixPolarisLink.mjs';
+ 
++
+ /**
+  * Sets up the Polaris `AppProvider` and injects the App Bridge script.
+  *
