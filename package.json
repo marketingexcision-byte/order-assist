@@ -21,9 +21,10 @@
     "vite": "vite"
   },
   "type": "module",
-  "engines": {
-    "node": ">=20.19 <22 || >=22.12"
-  },
+"engines": {
+  "node": "22.x"
+}
+
   "dependencies": {
     "@napi-rs/canvas": "^0.1.88",
     "@prisma/client": "^6.2.1",
