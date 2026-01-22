@@ -7,6 +7,11 @@ declare global {
   var __prisma: PrismaClient | undefined;
 }
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set at runtime");
+}
+console.log("RUNTIME DATABASE_URL prefix:", process.env.DATABASE_URL.slice(0, 20));
+
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient();
 } else {
